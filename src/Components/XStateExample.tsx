@@ -19,12 +19,12 @@ const dogFetcherMachine = Machine({
                 src: () => fetchRandomDog(),
                 onDone: {
                     target: "success",
-                    actions: assign({ dog: (_, event) => event.data.message })
-                },
+                    actions: assign({ dog: (_, event) => (event as any).data.message })
+                } as any,
                 onError: {
                     target: "failure",
-                    actions: assign({ error: (_, event) => event.data })
-                }
+                    actions: assign({ error: (_, event) => (event as any).data })
+                } as any
             },
             on: { CANCEL: "idle" }
         },
